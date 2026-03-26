@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bizim Küçük Evrenimiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #120b14;
+      --bg-2: #2a1027;
+      --rose: #ff7aa2;
+      --soft-rose: #ffd1dc;
+      --gold: #f9d98c;
+      --text: #fff8fb;
+      --glass: rgba(255, 255, 255, 0.10);
+      --border: rgba(255, 255, 255, 0.18);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,122,162,0.20), transparent 30%),
+        radial-gradient(circle at top right, rgba(249,217,140,0.12), transparent 25%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts */
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -40px;
+      font-size: 20px;
+      opacity: 0.20;
+      animation: floatUp linear infinite;
+      filter: blur(0.3px);
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.20;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: min(1150px, 92%);
+      margin: 0 auto;
+    }
+
+    header.hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      position: relative;
+      padding: 40px 0;
+    }
+
+    .hero-card {
+      width: min(900px, 100%);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 28px;
+      padding: 50px 30px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.10), transparent);
+      transform: translateX(-100%);
+      animation: shine 5s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%); }
+      30% { transform: translateX(100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .small-title {
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: var(--soft-rose);
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3.2rem, 8vw, 6.4rem);
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: #ffe9f0;
+      max-width: 700px;
+      margin: 0 auto 28px;
+      line-height: 1.8;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 500;
+      transition: 0.3s ease;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 20px rgba(255,122,162,0.18);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #ff7aa2, #ff4f87);
+      border: none;
+    }
+
+    section {
+      padding: 90px 0 30px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 16px;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      color: #fff4f7;
+    }
+
+    .section-desc {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 45px;
+      color: #f7dce5;
+      line-height: 1.8;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+    }
+
+    .photo-card {
+      grid-column: span 4;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      position: relative;
+    }
+
+    .photo-card:hover {
+      transform: translateY(-8px) rotate(-0.4deg);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.45);
+    }
+
+    .photo-wrap {
+      position: relative;
+      height: 320px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255,122,162,0.30), rgba(255,255,255,0.06)),
+        #3c1f33;
+    }
+
+    .photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .photo-number {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(18,11,20,0.6);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .caption {
+      padding: 22px 18px 24px;
+    }
+
+    .caption h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      color: #fff5f8;
+    }
+
+    .caption p {
+      font-size: 0.96rem;
+      line-height: 1.8;
+      color: #f9dde6;
+    }
+
+    .love-note {
+      margin-top: 70px;
+      padding: 35px 26px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--border);
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .love-note::after {
+      content: "♡";
+      position: absolute;
+      right: 25px;
+      bottom: 10px;
+      font-size: 4rem;
+      opacity: 0.08;
+    }
+
+    .love-note h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      margin-bottom: 12px;
+      color: #fff2f6;
+    }
+
+    .love-note p {
+      max-width: 780px;
+      margin: 0 auto;
+      line-height: 1.9;
+      color: #ffe3ea;
+      font-size: 1rem;
+    }
+
+    .typewriter-line {
+      display: inline-block;
+      border-right: 2px solid rgba(255,255,255,0.8);
+      white-space: nowrap;
+      overflow: hidden;
+      vertical-align: bottom;
+      animation: blink 0.8s infinite;
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    footer {
+      padding: 40px 0 70px;
+      text-align: center;
+      color: #f2cdd8;
+      font-size: 0.95rem;
+    }
+
+    footer span {
+      color: var(--gold);
+    }
+
+    @media (max-width: 980px) {
+      .photo-card {
+        grid-column: span 6;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-card {
+        padding: 40px 18px;
+      }
+
+      .gallery {
+        gap: 16px;
+      }
+
+      .photo-card {
+        grid-column: span 12;
+      }
+
+      .photo-wrap {
+        height: 280px;
+      }
+
+      .subtitle {
+        line-height: 1.7;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hearts" aria-hidden="true">
+    <div class="heart" style="left: 5%; animation-duration: 12s; animation-delay: 0s;">♥</div>
+    <div class="heart" style="left: 15%; animation-duration: 16s; animation-delay: 2s;">♡</div>
+    <div class="heart" style="left: 28%; animation-duration: 13s; animation-delay: 5s;">♥</div>
+    <div class="heart" style="left: 42%; animation-duration: 18s; animation-delay: 1s;">♡</div>
+    <div class="heart" style="left: 56%; animation-duration: 15s; animation-delay: 4s;">♥</div>
+    <div class="heart" style="left: 67%; animation-duration: 14s; animation-delay: 7s;">♡</div>
+    <div class="heart" style="left: 79%; animation-duration: 17s; animation-delay: 3s;">♥</div>
+    <div class="heart" style="left: 91%; animation-duration: 12s; animation-delay: 6s;">♡</div>
+  </div>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-card">
+        <p class="small-title">Sadece sana özel</p>
+        <h1>Bizim Küçük Evrenimiz</h1>
+        <p class="subtitle">
+          Bazı insanlar bir ömre denk gelir, bazılarıysa ömrün anlamına.
+          Bu sayfa, sana duyduğum şeylerin kelimelere sığmayınca bulduğu küçük bir yol.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#anilar" class="btn primary">Anılarımıza Bak</a>
+          <a href="#mektup" class="btn">Kalbimdeki Not</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="anilar">
+      <div class="container">
+        <h2 class="section-title">Seninle Güzel Olan 6 An</h2>
+        <p class="section-desc">
+          Buradaki her kare sadece bir fotoğraf değil; bir bakış, bir his, bir tesadüf,
+          bir gülüş ve biraz da “iyi ki” dememin nedeni.
+        </p>
+
+        <div class="gallery">
+          <article class="photo-card">
+            <div class="photo-wrap">
+                <span class="photo-number">01</span>
+                 <img src="1.jpg" alt="Birlikte çekilmiş romantik fotoğraf 1">
+            </div>
+             <div class="caption">
+                 <h3>Seninle Başlayan Huzur</h3>
+                 <p>
+                 Bazı insanlar hayatına tesadüf eseri girer ama her şeyi değiştirir.
+                Seninle birlikte içimde garip bir sakinlik oluştu;
+                sanki hep aradığım ama adını koyamadığım şey, senmişsin gibi.
+                 </p>
+            </div>
+</article>
+
+          <article class="photo-card">
+            <div class="photo-wrap">
+              <span class="photo-number">02</span>
+              <img src="2.jpg" alt="Birlikte çekilmiş romantik fotoğraf 2">
+            </div>
+            <div class="caption">
+              <h3>Gülüşünün Olduğu Yer</h3>
+              <p>
+                Sen gülünce ortam değişiyor. Işık başka vuruyor, zaman biraz yavaşlıyor,
+                ben ise seni izlerken hayatın en doğru sahnesine denk gelmiş gibi hissediyorum.
+              </p>
+            </div>
+          </article>
+
+          <article class="photo-card">
+            <div class="photo-wrap">
+              <span class="photo-number">03</span>
+              <img src="3.jpg" alt="Birlikte çekilmiş romantik fotoğraf 3">
+            </div>
+            <div class="caption">
+              <h3>Birlikteyken Basit Şeylerin Bile Güzel Oluşu</h3>
+              <p>
+                Seninle geçen sıradan bir an bile başlı başına özel. Çünkü mesele nerede
+                olduğumuz değil; aynı duygunun içinde yan yana duruyor olmamız.
+              </p>
+            </div>
+          </article>
+
+          <article class="photo-card">
+            <div class="photo-wrap">
+              <span class="photo-number">04</span>
+              <img src="4.png" alt="Birlikte çekilmiş romantik fotoğraf 4">
+            </div>
+            <div class="caption">
+              <h3>Özlemek Bile Güzel</h3>
+              <p>
+                Uzak olsan da kalbime en yakın kişisin. Seni özlemek bazen can yakıyor,
+                ama aynı zamanda ne kadar derin sevdiğimi de bana usulca hatırlatıyor.
+              </p>
+            </div>
+          </article>
+
+          <article class="photo-card">
+            <div class="photo-wrap">
+              <span class="photo-number">05</span>
+              <img src="5.jpg" alt="Birlikte çekilmiş romantik fotoğraf 5">
+            </div>
+            <div class="caption">
+              <h3>Kalbimin En Güzel Alışkanlığı</h3>
+              <p>
+                Seninle ilgili en güzel şeylerden biri, hayatımın içine ne kadar doğal bir şekilde yerleşmiş olman.
+                Artık çoğu şeyin içinde biraz sen varsın… ve varlığın bir his değil, alıştığım en güzel gerçek.
+              </p>
+            </div>
+          </article>
+
+          <article class="photo-card">
+            <div class="photo-wrap">
+              <span class="photo-number">06</span>
+              <img src="6.jpg" alt="Birlikte çekilmiş romantik fotoğraf 6">
+            </div>
+            <div class="caption">
+              <h3>Bir Gelecek Hayali</h3>
+              <p>
+                Fotoğraflara baktığımda sadece geçmişi değil, geleceği de görüyorum.
+                İçinde senin olduğun her ihtimal bana huzurlu, sıcak ve ev gibi geliyor.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="love-note" id="mektup">
+          <h2>Kalbimden Sana</h2>
+          <p>
+            Bazen sana söylemek istediğim şeyler bir cümleye sığmıyor.
+            Çünkü sen sadece sevdiğim biri değilsin; hayatın içindeki güzel detayları fark etme nedenimsin.
+            Sesin günümü toparlıyor, gülüşün içimi yumuşatıyor, varlığın bana “tamam, her şey yoluna girebilir” hissi veriyor.
+            Bu sayfa küçük olabilir ama duygum küçük değil.
+            <br><br>
+            <span class="typewriter-line" id="typewriter"></span>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Senin için sevgiyle kodlandı <span>♥</span>
+  </footer>
+
+  <script>
+    const message = "Seni bugün dünden daha çok, yarınsa bugünden daha çok seveceğim.";
+    const target = document.getElementById("typewriter");
+    let index = 0;
+
+    function typeEffect() {
+      if (index < message.length) {
+        target.textContent += message.charAt(index);
+        index++;
+        setTimeout(typeEffect, 55);
+      }
+    }
+
+    window.addEventListener("load", typeEffect);
+  </script>
+</body>
+</html>
